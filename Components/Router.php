@@ -33,7 +33,14 @@ class Router
             if (preg_match("~$uriPattern~",$uri)){
                 //Определить какой контроллер
                 //и action обабатывают зарос
-                $segments = explode('/',$path);
+
+//                echo '<br>'.$uri;
+//                echo '<br>'.$uriPattern;
+//                echo '<br>'.$path;
+
+                $internalRoute = preg_replace("~$uriPattern~",$path, $uri);
+
+                $segments = explode('/',$internalRoute);
                 //array_shift - берем первый елемент масива и удаляем его из масива
                 $controllerName = array_shift($segments).'Controller';
                 $controllerName = ucfirst($controllerName);
@@ -41,8 +48,15 @@ class Router
                 $actionName = 'action'.ucfirst(array_shift($segments));
 
 
-//                echo '<br>Класс: '.$controllerName;
-//                echo '<br>Метод: '.$actionName;
+                echo '<br>Класс: '.$controllerName;
+                echo '<br>Метод: '.$actionName;
+                $parameters = $segments;
+                echo '<pre></pre> ';
+                print_r($parameters);
+
+
+
+
 
                 //Подключение файла класса- контроллера
                 $controllerFile = ROOT. '/Controllers/'. $controllerName .'.php';
@@ -53,7 +67,12 @@ class Router
 
                 //Создать объект, вызвать метода (action)
                 $controllerObject = new $controllerName;
-                $result = $controllerObject->$actionName();
+
+                // Вызов action c имененм $actionName у объекта $controllerObject,
+                // передавая масив с параметрами $parameters
+                $result = call_user_func_array(array($controllerObject,$actionName),$parameters);
+
+//                    $controllerObject->$actionName($parameters);
                 if ($result != null){
                     break;
                 }

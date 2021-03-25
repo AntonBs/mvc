@@ -1,5 +1,11 @@
 <?php
 
+// $string = '25-03-2021';
+// $pattern= '/([0-9]{2})-([0-9]{2})-([0-9]{4})/';
+// $replacement = 'Month: $2, Day: $1, Year: $3';
+// echo preg_replace($pattern,$replacement,$string);
+
+
  //Front controller
 
  //Общие настройки
