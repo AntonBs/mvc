@@ -8,8 +8,18 @@ class News
      */
     public static function  getNewsItemById($id)
     {
-      //Запрос к БД
+      $id = intval($id);
 
+      if($id){
+
+          $db = DB::getConnection();
+
+          $result = $db->query('SELECT * from bublication WHERE  id='.$id,PDO::FETCH_ASSOC);
+
+          $newsItem = $result->fetch();
+
+          return $newsItem;
+      }
 
     }
 
@@ -22,19 +32,18 @@ class News
     {
         //Запрос к БД
 
-        $host = 'localhost';
-        $dbname = 'mvc_test';
-        $user = 'root';
-        $password = '';
-        $db = new PDO("mysql:host=$host;dbname=$dbname",$user,$password);
+        $db = DB::getConnection();
 
         $newsList = array();
 
-        $result= $db->query('SELECT id, title, date, short_content'
-                . 'FROM news'
-                . 'ORDER BY date DESC'
-                . 'LIMIT 10'
-        );
+//        $result= $db->query('SELECT id, title, date, short_content'
+//                . 'FROM bublication'
+//                . 'ORDER BY date DESC'
+//                . 'LIMIT 10'
+//        );
+
+        $result = $db->query('SELECT * FROM `bublication` WHERE true ORDER BY `date` DESC LIMIT 10 ',PDO::FETCH_ASSOC);
+//        var_dump($result);
 
         $i = 0;
 

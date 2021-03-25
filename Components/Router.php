@@ -40,7 +40,16 @@ class Router
 
                 $internalRoute = preg_replace("~$uriPattern~",$path, $uri);
 
+//                echo '<br>'.$internalRoute;
+
                 $segments = explode('/',$internalRoute);
+
+                //Костыль для локального сервера, удалить для хостинга
+                if ($segments[0]=='mvc'){
+                    $segments = array_slice($segments,1);
+                }
+//                var_dump($segments);
+
                 //array_shift - берем первый елемент масива и удаляем его из масива
                 $controllerName = array_shift($segments).'Controller';
                 $controllerName = ucfirst($controllerName);
@@ -51,8 +60,8 @@ class Router
                 echo '<br>Класс: '.$controllerName;
                 echo '<br>Метод: '.$actionName;
                 $parameters = $segments;
-                echo '<pre></pre> ';
-                print_r($parameters);
+//                echo '<pre></pre> ';
+//                print_r($parameters);
 
 
 

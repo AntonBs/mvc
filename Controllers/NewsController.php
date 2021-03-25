@@ -15,11 +15,18 @@ class NewsController
 
         return true;
     }
-    public function actionView($category, $id)
+    public function actionView($id)
     {
-//        echo '<br>'.$category;
-//        echo '<br>'.$id;
-        echo '<br>Просмотр одиночной новости';
-        return true;
+        if ($id){
+            $newsItem = News::getNewsItemById($id);
+
+            echo '<pre>';
+            print_r($newsItem);
+            echo '</pre>';
+
+            echo 'actionView';
+            return true;
+        }
+
     }
 }

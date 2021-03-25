@@ -15,7 +15,7 @@
  //Подключение файлов
  define('ROOT',dirname(__FILE__));
  require_once (ROOT.'/Components/Router.php');
-
+ require_once (ROOT.'/Components/DB.php');
  //БД
 
 
