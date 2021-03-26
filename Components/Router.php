@@ -57,8 +57,8 @@ class Router
                 $actionName = 'action'.ucfirst(array_shift($segments));
 
 
-                echo '<br>Класс: '.$controllerName;
-                echo '<br>Метод: '.$actionName;
+//                echo '<br>Класс: '.$controllerName;
+//                echo '<br>Метод: '.$actionName;
                 $parameters = $segments;
 //                echo '<pre></pre> ';
 //                print_r($parameters);
